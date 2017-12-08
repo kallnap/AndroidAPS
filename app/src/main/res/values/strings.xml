@@ -790,7 +790,7 @@
     <string name="bolusstopped">Bolus delivery stopped</string>
     <string name="combo_programming_bolus">Programming pump for bolusing</string>
     <string name="combo_refresh">Refresh</string>
-    <string name="combo_stats">TDDS</string>
+    <string name="combo_tdds">TDDS</string>
     <string name="combo_pump_state_label">State</string>
     <string name="combo_pump_activity_label">Activity</string>
     <string name="combo_no_pump_connection">No connection for %d min</string>
@@ -831,5 +831,9 @@
     <string name="combo_reservoir_low">Low</string>
     <string name="combo_reservoir_empty">Empty</string>
     <string name="combo_reservoir_normal">Normal</string>
+    <string name="combo_history">History</string>
+    <string name="combo_warning">Warning</string>
+    <string name="combo_read_full_history_warning">This will read the full history and state of the pump. Everything in \"My Data\" and  the basal rate. Boluses and TBRs will be added to Treatments if they don\'t already exist. This can cause entries to be duplicated because the pump\'s time is imprecise. Using this when normally looping with the pump is highly discouraged and reserved for special circumstances. If you still want to do this, long press this button again.\n\nWARNING: this can trigger a bug which causes the pump to reject all connection attempts and requires pressing a button on the pump to recover and should therefore be avoided.</string>
+    <string name="combo_read_full_history_confirmation">Are you really sure you want to read all pump data and take the consequences of this action?</string>
 </resources>
 
