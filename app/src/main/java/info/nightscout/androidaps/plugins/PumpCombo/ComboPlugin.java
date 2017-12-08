@@ -46,7 +46,6 @@ import info.nightscout.androidaps.plugins.Overview.events.EventOverviewBolusProg
 import info.nightscout.androidaps.plugins.Overview.notifications.Notification;
 import info.nightscout.androidaps.plugins.PumpCombo.events.EventComboPumpUpdateGUI;
 import info.nightscout.utils.DateUtil;
-import info.nightscout.utils.SP;
 
 import static de.jotomo.ruffy.spi.BolusProgressReporter.State.FINISHED;
 
@@ -97,7 +96,6 @@ public class ComboPlugin implements PluginBase, PumpInterface, ConstraintsInterf
     private volatile boolean bolusInProgress;
     private volatile boolean cancelBolus;
     private Bolus lastRequestedBolus;
-    private long pumpHistoryLastChecked;
 
     public static ComboPlugin getPlugin() {
         if (plugin == null)
@@ -872,34 +870,13 @@ public class ComboPlugin implements PluginBase, PumpInterface, ConstraintsInterf
         }
     }
 
-    void readAllPumpData() {
-        long lastCheckInitiated = System.currentTimeMillis();
+    void readTddData() {
+        readHistory(new PumpHistoryRequest().tddHistory(PumpHistoryRequest.FULL));
+    }
 
-        boolean readHistorySuccess = readHistory(new PumpHistoryRequest()
-                .bolusHistory(pumpHistoryLastChecked)
-                .tbrHistory(pumpHistoryLastChecked)
-                .pumpErrorHistory(PumpHistoryRequest.FULL)
-                .tddHistory(PumpHistoryRequest.FULL));
-        if (!readHistorySuccess) {
-            return;
-        }
-
-        pumpHistoryLastChecked = lastCheckInitiated;
-
-/* not displayed in the UI anymore due to pump bug
-        CommandResult reservoirResult = runCommand("Checking reservoir level", 2,
-                ruffyScripter::readReservoirLevelAndLastBolus);
-        if (!reservoirResult.success) {
-            return;
-        }
-*/
-
-        CommandResult basalResult = runCommand("Reading basal profile", 2, ruffyScripter::readBasalProfile);
-        if (!basalResult.success) {
-            return;
-        }
-
-        pump.basalProfile = basalResult.basalProfile;
+    void readAlertData() {
+        readHistory(new PumpHistoryRequest()
+                .pumpErrorHistory(PumpHistoryRequest.FULL));
     }
 
     @Override
