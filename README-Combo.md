@@ -50,7 +50,7 @@ Setup
       it's not possible to run the loop in a safe manner when used.
     - Verify the _Quick Info Text_ is set to "QUICK INFO" (without the quotes, found under _Insulin Pump Options_).
     - Set maximum TBR to 500%
-    - Disable end of TBR alert
+    - Disable (audible) end of TBR alert
     - Set TBR duration step-size to 15 min
   - Recommended:
     - Set low cartridge alarm to your liking
